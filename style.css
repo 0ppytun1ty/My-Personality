@@ -1,0 +1,82 @@
+/* ===== 흑백 전용. 색은 여기 네 개만 바꾸면 돼요 ===== */
+:root{
+  --bg:#ffffff; --ink:#000000; --sub:#6b6b6b; --soft:#e4e4e4;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#000000; --ink:#ffffff; --sub:#9a9a9a; --soft:#2a2a2a}
+}
+*,*::before,*::after{box-sizing:border-box}
+
+body{
+  margin:0;min-height:100vh;background:var(--bg);color:var(--ink);
+  font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+  display:grid;place-items:center;padding:24px;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+main{width:100%;max-width:460px}
+
+/* 카드: 그림자·그라데이션 없이 얇은 선만 */
+.card{border:1px solid var(--ink);border-radius:4px;padding:36px 28px;animation:fade .35s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+.step{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;color:var(--sub);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;margin:0 0 14px}
+h1{font-size:1.7rem;line-height:1.3;font-weight:800;letter-spacing:-.03em;margin:0 0 26px;word-break:keep-all}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+
+button{
+  font:inherit;font-size:.95rem;font-weight:600;color:var(--ink);cursor:pointer;
+  background:transparent;border:1px solid var(--ink);border-radius:4px;padding:13px 22px;
+  transition:background .15s,color .15s;
+}
+button:hover{background:var(--ink);color:var(--bg)}
+button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+button.main{background:var(--ink);color:var(--bg)}
+button.main:hover{background:var(--bg);color:var(--ink)}
+.no{transition:left .15s,top .15s,background .15s,color .15s}
+.no.run{position:fixed;z-index:9;background:var(--bg)}
+
+input[type=range]{width:100%;accent-color:var(--ink);margin:10px 0}
+.row{display:flex;justify-content:space-between;color:var(--sub);font-size:.85rem}
+.bar{height:4px;overflow:hidden;margin:18px 0;background:var(--soft)}
+.bar .fill{display:block;height:100%;width:0;background:var(--ink)}
+.big{font-size:2.6rem;margin:0 0 8px;filter:grayscale(1)}
+.hide{display:none}
+.stat{color:var(--sub);font-size:.88rem;margin-top:16px}
+.toast{margin-top:18px;padding:11px 14px;background:var(--ink);color:var(--bg);border-radius:4px;font-weight:600;filter:grayscale(1)}
+
+/* ===== 홈 화면 ===== */
+.badge{
+  display:inline-block;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--ink);padding:4px 10px;margin-bottom:18px;
+}
+.desc{color:var(--sub);line-height:1.7;margin:-10px 0 24px;word-break:keep-all;font-size:.95rem}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--ink);margin-bottom:24px}
+.stats div{padding:14px 4px;text-align:center;border-left:1px solid var(--ink)}
+.stats div:first-child{border-left:0}
+.stats b{display:block;font-size:1rem;line-height:1.25;height:1.25em}
+.stats div > span{display:block;font-size:.72rem;color:var(--sub);line-height:1.4}
+[data-type="home"] .start{width:100%;font-size:1.02rem;padding:15px}
+.fine{color:var(--sub);font-size:.74rem;text-align:center;margin:14px 0 0}
+
+/* ===== 사이트 맨 아래 푸터 ===== */
+.site-foot{margin-top:22px;text-align:center;font-size:.75rem;color:var(--sub);opacity:.5;transition:opacity .2s}
+.site-foot:hover{opacity:.85}
+.site-foot a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.site-foot span{margin:0 6px}
+
+/* ===== 난장판(chaos) 효과 ===== */
+.chaos1 .btns button:nth-child(odd){transform:rotate(-3deg)}
+.chaos1 .btns button:nth-child(even){transform:rotate(2deg)}
+.chaos2{animation:shake .5s infinite}
+.chaos3{animation:wobble 2.5s ease-in-out infinite}
+@keyframes shake{0%,100%{transform:translate(0,0)}25%{transform:translate(-3px,2px)}50%{transform:translate(3px,-2px)}75%{transform:translate(-2px,-3px)}}
+@keyframes wobble{0%,100%{transform:rotate(-2deg) scale(1)}50%{transform:rotate(2deg) scale(1.03)}}
+
+/* ===== 참여자 수: 아날로그 룰렛 숫자 ===== */
+.stats .count{display:flex;justify-content:center;align-items:flex-start;font-variant-numeric:tabular-nums;overflow:hidden}
+.count .digit{display:block;height:1.25em;overflow:hidden}
+.count .reel{display:block;transition:transform .55s cubic-bezier(.3,.9,.3,1)}
+.count .reel span{display:block;height:1.25em;line-height:1.25em}
+.count .sep{display:block;line-height:1.25em;white-space:pre}
+.count .digit,.count .reel span,.count .sep{font-size:inherit;color:inherit}
